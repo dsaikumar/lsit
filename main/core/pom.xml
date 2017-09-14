@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.dsk</groupId>
+		<artifactId>main</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>main-app</groupId>
+	<artifactId>core</artifactId>
+	<packaging>war</packaging>
+	<name>core Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring-webmvc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-databind.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring-data-mongodb.version}</version>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<!-- JBoss Repository used for Java EE 6 pieces -->
+		<repository>
+			<id>repository.jboss.org</id>
+			<name>JBoss Repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+	</repositories>
+	<build>
+		<finalName>core</finalName>
+	</build>
+	<properties>
+		<spring-webmvc.version>4.0.5.RELEASE</spring-webmvc.version>
+		<junit.version>3.8.1</junit.version>
+		<jackson-databind.version>2.0.0-RC1</jackson-databind.version>
+		<spring-data-mongodb.version>1.5.1.RELEASE</spring-data-mongodb.version>
+	</properties>
+</project>
