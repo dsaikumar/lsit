@@ -1,2 +1,1 @@
-# samples
-for any language or technology
+Typescript learning
