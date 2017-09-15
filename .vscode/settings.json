@@ -1,0 +1,38 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+"editor.tabSize": 2,
+"editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "editor.showFoldingControls": "always",
+  "workbench.editor.showTabs": false,
+  "workbench.editor.tabCloseButton": "left",
+  // Controls the window title based on the active editor. Variables are substituted based on the context:
+  // ${activeEditorShort}: e.g. myFile.txt
+  // ${activeEditorMedium}: e.g. myFolder/myFile.txt
+  // ${activeEditorLong}: e.g. /Users/Development/myProject/myFolder/myFile.txt
+  // ${rootName}: e.g. myProject
+  // ${rootPath}: e.g. /Users/Development/myProject
+  // ${appName}: e.g. VS Code
+  // ${dirty}: a dirty indicator if the active editor is dirty
+  // ${separator}: a conditional separator (" - ") that only shows when surrounded by variables with values
+  "window.title": "${activeEditorLong}",
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "files.watcherExclude": {
+    "**/.git": true,
+    "**/node_modules/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true
+  }
+}
