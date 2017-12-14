@@ -1,0 +1,9 @@
+1. Install typescript for VSCODE.
+2. Types for primitives are 
+     var x:boolean, y:number, z:string;
+3. For array 
+     var myArray:number[]=[12,20]  ---> is valid
+     var myArray:number[]=[12,'s']  ---> is invalid
+     but var myArray:any[]=[12,'s'] ---> is valid
+
+4. For function also we can define the return type of the functions
