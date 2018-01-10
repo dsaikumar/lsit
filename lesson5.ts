@@ -13,5 +13,5 @@ function perimeter(side1:number, side2?:number, side3?:number, side4?:number):nu
 
 perimeter(1); //square
 perimeter(1,2); //rectangle
-perimeter(1,2,3); //quadrilateral --> Fails, since declaration is not there, if this need to work uncomment line 6
+perimeter(1,2,3); //quadrilateral --> Fails, since declaration is not there, if this need to work uncomment line 7
 perimeter(1,2,3,4); //trapezium
