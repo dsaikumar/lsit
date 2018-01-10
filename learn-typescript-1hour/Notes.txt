@@ -7,3 +7,9 @@
      but var myArray:any[]=[12,'s'] ---> is valid
 
 4. For function also we can define the return type of the functions
+5. void is similar to java return type, which means nothing to return.
+5. Interfaces are defined for the 
+   - Declarations of the functions, so when the developer comes back and see the blueprint or the exact expectation of the function
+   - To define the beans or entity objects or ViewObjects or JSONS
+   - Similar to Java Interace but with non static properties.
+   - In simple terms to define a Type in typescript.

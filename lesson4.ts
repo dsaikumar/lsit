@@ -8,7 +8,7 @@ function add(a:number, b?:number):number{
 console.log(add(10,20));
 console.log(add(10));
 
-function add1(a?:number, b?:number):number{
+function add11(a?:number, b?:number):number{
      if(b && a){
           return a+b;
      }else if(a){
@@ -19,8 +19,8 @@ function add1(a?:number, b?:number):number{
           return a;
      }
 }
-console.log(add1(10,20));
-console.log(add1(10));
+console.log(add11(10,20));
+console.log(add11(10));
 
 function add2(a?:number, b:number):number{
      if(b && a){
