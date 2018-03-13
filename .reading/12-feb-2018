@@ -1,0 +1,30 @@
+List of docker commands :
+============================
+-> docker images    :    To list all the images in local docker which are downloaded
+-> docker search    :    To search in all the repositories of docker for a image
+-> docker pull      :    To pull the image from the repositories
+-> docker ps        :    To list the containers
+
+
+run/exec/inspect 
+---------------- 
+docker run -it [imagename:tag] /bin/bash 
+docker run --name [name] -it [imagename:tag] /bin/bash 
+docker inspect [containername] 
+Ctrl-pq - exit 
+
+docker exec -it [containername] /bin/bash 
+Copy files
+---------- 
+docker cp foo.txt [containername]:/foo.txt 
+docker cp [containername]:/foo.txt foo.txt 
+
+Remove container
+----------------
+docker rm [container] 
+docker rmi [image] 
+
+Stop and remove all containers 
+------------------------------ 
+docker stop $(docker ps -a -q) 
+docker rm $(docker ps -a -q)
