@@ -6,14 +6,20 @@ List of docker commands :
 -> docker ps        :    To list the containers
 
 
-run/exec/inspect 
+run//inspect 
 ---------------- 
 docker run -it [imagename:tag] /bin/bash 
 docker run --name [name] -it [imagename:tag] /bin/bash 
+
+Inspecting the configuration of docker container
+------------------------------------------------
 docker inspect [containername] 
 Ctrl-pq - exit 
 
+Executing the container 
+--------------------------
 docker exec -it [containername] /bin/bash 
+
 Copy files
 ---------- 
 docker cp foo.txt [containername]:/foo.txt 
@@ -22,6 +28,9 @@ docker cp [containername]:/foo.txt foo.txt
 Remove container
 ----------------
 docker rm [container] 
+
+Remove a image
+------------------
 docker rmi [image] 
 
 Stop and remove all containers 
