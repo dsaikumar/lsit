@@ -1,3 +1,3 @@
-ARG LINUX_VERSION=3.4
-FROM alphine:${LINUX_VERSION}
+FROM alphine:3.4
+FROM node
 RUN echo Welcome to Docker Sai

@@ -50,3 +50,15 @@ docker-compose --version
  docker run alpine:3.4 /bin/sh
  docker run alpine:3.4 echo "hello from alpine"
  docker run -it alpine:3.4 /bin/sh
+ docker pull nginx:1.10.1-alpine
+ docker run --name my-nginx -p 80:80 nginx:1.10.1-alpine
+ docker run -it alpine /bin/sh
+ docker start -i 936f67224ea1
+ docker stop 34e2713eb555
+ docker rm 34e2713eb555
+ docker inspect alpine:3.4
+ docker run --name static-site -e AUTHOR="DSK" -d -P dockersamples/static-site
+ docker port static-site
+ docker port a93121492780
+ docker run --name static-site-2 -e AUTHOR="DSK-1" -p 80:80 -d dockersamples/static-site
+ docker-machine ip default
