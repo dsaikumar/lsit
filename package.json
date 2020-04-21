@@ -10,7 +10,9 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7"
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "prettier": "2.0.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,6 +25,10 @@
   "keywords": [
     "learning"
   ],
+  "engines": {
+    "node": "8.9.4"
+  },
+  "engineStrict": true,
   "author": "sai kumar desu",
   "license": "ISC",
   "bugs": {
