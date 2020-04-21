@@ -12,9 +12,9 @@
   <script type="application/javascript" src="node_modules/angular/angular.min.js"></script>
   <script type="application/javascript" src="src/app.js"></script>
 </head>
-<body>
+<body ng-controller="TestController as vm">
   <div class="well">
-    <h1 >Welcome to D3JS SAI</h1>
+    <h1 data-ng-bind="vm.helloWorldText"></h1>
   </div>
 </body>
 </html>
