@@ -1,0 +1,27 @@
+{
+  "name": "lsit",
+  "version": "1.0.0",
+  "description": "for any language or technology",
+  "main": "index.js",
+  "dependencies": {
+    "browser-sync": "^2.26.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start -s -f index.html src --no-notify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsaikumar/lsit.git"
+  },
+  "keywords": [
+    "learning"
+  ],
+  "author": "sai kumar desu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsaikumar/lsit/issues"
+  },
+  "homepage": "https://github.com/dsaikumar/lsit#readme"
+}
