@@ -13,7 +13,7 @@ module.run(['$d3', '$lodash', function($d3, $lodash){
   console.log('Lodash version --> ' + $lodash.VERSION);
   console.log('D3 version --> ' + $d3.version);
 }]);
-module.controller('TestController', [function(){
+module.controller('TestController', ['$d3', function($d3){
  var vm = this;
- vm.helloWorldText = 'Welcome to D3JS';
+ vm.helloWorldText = 'Welcome to D3JS - '+ $d3.version;
 }]);
