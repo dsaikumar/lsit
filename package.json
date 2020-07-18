@@ -16,7 +16,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start -s -f index.html src --no-notify"
+    "start": "browser-sync start -s -f index.html src --no-notify",
+    "go": "gulp "
   },
   "repository": {
     "type": "git",
