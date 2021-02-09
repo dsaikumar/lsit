@@ -15,5 +15,5 @@ module.run(['$d3', '$lodash', function($d3, $lodash){
 }]);
 module.controller('TestController', ['$d3', function($d3){
  var vm = this;
- vm.helloWorldText = 'Welcome to D3JS - '+ $d3.version;
+ vm.helloWorldText = 'Welcome to D3JS 1 - '+ $d3.version;
 }]);

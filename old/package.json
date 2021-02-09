@@ -11,13 +11,15 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
+    "browserify": "^17.0.0",
     "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0",
+    "gulp-uglify": "^3.0.2",
     "prettier": "2.0.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start -s -f index.html src --no-notify",
-    "go": "gulp "
+    "start": "gulp serve"
   },
   "repository": {
     "type": "git",
