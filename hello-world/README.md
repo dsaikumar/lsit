@@ -1,3 +1,13 @@
+# Application Requirements
+## NodeJS
+     $node --version
+      v10.15.0
+
+     $npx -v
+      6.4.1
+
+     $npm -v
+      6.4.1
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
