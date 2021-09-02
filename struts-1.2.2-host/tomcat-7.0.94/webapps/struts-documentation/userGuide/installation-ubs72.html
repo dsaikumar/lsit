@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>The Struts Framework Project - Installation - Bluestone UBS 7.2</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="Mike Schachter" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+    
+    <p>User Guide</p>
+<ul>
+      <li>
+<a href="index.html">Table of Contents</a>
+</li>
+      <li>
+<a href="preface.html">Preface</a>
+</li>
+      <li>
+<a href="introduction.html">Introduction</a>
+</li>
+      <li>
+<a href="building_model.html">Model Components</a>
+</li>
+      <li>
+<a href="building_view.html">View Components</a>
+</li>
+      <li>
+<a href="building_controller.html">Controller Components</a>
+</li>
+      <li>
+<a href="configuration.html">Configuration</a>
+</li>
+      <li>
+<a href="release-notes.html">Release Notes</a>
+</li>
+      <li>
+<a href="installation.html">Installation</a>
+</li>
+    </ul>
+
+    <p>Developer Guides</p>
+<ul>
+        <li>
+<a href="dev_bean.html">Bean Tags</a>
+</li>
+        <li>
+<a href="dev_html.html">HTML Tags</a>
+</li>
+        <li>
+<a href="dev_logic.html">Logic Tags</a>
+</li>
+        <li>
+<a href="dev_nested.html">Nested Tags</a>
+</li>
+        <li>
+<a href="dev_tiles.html">Tiles Tags</a>
+</li>
+        <li>
+<a href="dev_util.html">Utilities</a>
+</li>
+        <li>
+<a href="dev_validator.html">Validator</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+        <li>
+<a href="index.html">User and Developer Guides *</a>
+</li>
+        <li>
+<a href="../faqs/index.html">FAQs and HowTos</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>Mike Schachter</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+<h1 id="installation">5.2 Installation</h1>
+<h2 id="Containers">Installing Struts with your servlet container</h2>
+<div class="indent">
+<h4 id="bluestone">Bluestone Universal Business Server 7.2</h4>
+
+<ul>
+  <li>You need UBS version 7.2 to run war file applications. The UBS 7.2.2 evaluation
+    is located <a href="http://www.bluestone.com/SaISAPI.dll/SaServletEngine.class/products/downloads.jsp">here</a>.
+    If you're using version 7.2.1, you need to download the WAR file patch, located
+    in the product enhancement section of Bluestone's website <a href="http://www.bluestone.com/SaISAPI.dll/SaServletEngine.class/products/wfe.jsp">here</a>
+  </li>
+  <li> After installation of the correct version and/or patch of UBS 7.2, you
+    need to modify your apserver.txt file to point to the correct directory for
+    your war file applications. Look for the section that says something similar
+    to the following:<br />
+    <pre>
+  [SaServletEngine.class]
+  session_affinity=1
+  type=1
+  program=/SaServletEngine.class
+  file_path=f:\webapps
+  host=localhost:20000
+</pre>
+  </li>
+
+  <li>Use the directory specified by the "file_path" variable, or modify it to
+    point to your own custom webapp directory. Copy the "struts-documention.war"
+    and "struts-example.war" files into that webapp directory, and start the UBS
+    (read documentation distributed with UBS for information on how to start it
+    if necessary). Your webapps are now accessible from the following URL:
+    <p class="center"> http://localhost/&lt;PLUGIN&gt;/SaServletEngine.class/struts-example/<br />
+      http://localhost/&lt;PLUGIN&gt;/SaServletEngine.class/struts-documentation/
+    </p>
+  </li>
+
+  <li> Note: "&lt;PLUGIN&gt;" represents the plugin you are using for your specific
+    webserver. For Apache on Windows, it might be "cgi-bin/SaCGI.exe", for IIS
+    on Windows, it might be "scripts/SaCGI.exe" or "scripts/ISAPI.dll". Consult
+    the UBS documentation for more information. </li>
+</ul>
+  <hr />
+   <ul>
+    <li>Author: Mike Schachter</li>
+  </ul>
+  <hr />
+  <p>Back to <a href="installation.html#Containers">Installation</a>
+</p>
+</div>
+</div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

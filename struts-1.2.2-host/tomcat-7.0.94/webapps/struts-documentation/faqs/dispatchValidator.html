@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title> Using the DispatchAction and Validator</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="Nick Afshartous" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+
+    <p>FAQs</p>
+<ul>
+        <li>
+<a href="kickstart.html">Kickstart</a>
+</li>
+        <li>
+<a href="newbie.html">Newbie</a>
+</li>
+        <li>
+<a href="helping.html">How to Help</a>
+</li>
+    </ul>
+
+    <p>Howto Guides</p>
+<ul>
+        <li>
+<a href="actionForm.html">Action Forms</a>
+</li>
+        <li>
+<a href="apps.html">Building Apps</a>
+</li>
+        <li>
+<a href="database.html">Database</a>
+</li>
+        <li>
+<a href="indexedprops.html">Indexed Properties</a>
+</li>
+        <li>
+<a href="ssl.html">SSL</a>
+</li>
+
+        <li>
+<a href="struts-el.html">Struts-EL (JSTL)</a>
+</li>
+    </ul>
+
+    <p>IDE Guides</p>
+<ul>
+        <li>
+<a href="eclipse.html">Eclipse</a>
+</li>
+        <li>
+<a href="netbeans.html">Netbeans</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+
+        <li>
+<a href="../userGuide/index.html">User and Developer Guides</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>Nick Afshartous</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+
+<h1 id="dispatch-validator">Dispatching And Validating</h1>
+<h2>Overview</h2>
+<div class="indent">
+
+    <p>
+    This is simple example to illustrate how to build a multi-page
+    wizard that utilizes both the <code>DispatchAction</code> and Commons Validator.
+    Using the <code>DispatchAction</code> helps to minimize the number of action classes
+    while the Validator supports the declarative (non-programmatic) specification of
+    form field validations.
+    </p>
+
+</div>
+<h2 id="dispatch">Using the DispatchAction</h2>
+<div class="indent">
+
+    <p>
+    The example used is a simple two page wizard.  The first page prompts
+    for a name, while the second for an address.
+    The application URL has the form
+    </p>
+
+<pre>
+<code>
+http://localhost:8080/howto/name.do?submitName=enterName
+</code>
+</pre>
+    <p>
+    where the <code>submitName</code> parameter is used to specify the name
+    of the method in the action class that will be called to
+    process the request.  In the action mapping the value of the
+    <code>parameter</code> attribute specifies the name of the dispatch request parameter (i.e. <code>parameter="submitName"</code>).
+    </p>
+
+<pre>
+<code>
+&lt;action path="/name"
+        type="com.acme.AcmeAction"
+        name="acmeForm"
+        scope="session"
+        input="/pages/name.jsp"
+        parameter="submitName"&gt;
+    &lt;forward name="name"
+             path="/pages/name.jsp"/&gt;
+    &lt;forward name="address"
+            path="/pages/address.jsp"/&gt;
+&lt;/action&gt;
+</code>
+</pre>
+
+The method <code>enterName</code> simply forwards to the first page.
+
+<pre>
+<code>
+public ActionForward enterName(ActionMapping mapping,
+                               ActionForm form,
+                               HttpServletRequest request,
+                               HttpServletResponse response)
+       throws Exception {
+
+    return mapping.findForward("name");
+
+}
+</code>
+</pre>
+
+On the page <code>name.jsp</code> is a hidden field for the <code>submitName</code> parameter.
+
+Submitting the name page calls method <code>enterAddress</code> by using
+Javascript to set the <code>submitName</code> parameter
+
+
+<pre>
+<code>
+&lt;html:submit onclick="this.form.submitName.value='enterAddress'"/&gt;
+</code>
+</pre>
+
+The <code>enterAddress</code> method then forwards to the address page.
+
+<pre>
+<code>
+public ActionForward enterAddress(ActionMapping mapping,
+                                  ActionForm form,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response)
+      throws Exception {
+
+    return mapping.findForward("address");
+}
+</code>
+</pre>
+
+On the <code>adddress.jsp</code> page, we again dynamically set the <code>submitName</code>
+parameter.
+
+<pre>
+<code>
+&lt;html:submit value="submit" onclick="this.form.submitName.value='submitAddress'"/&gt;
+</code>
+</pre>
+
+And the action path that is submitted is
+
+<pre>
+<code>
+    &lt;html:form action="/address"&gt;
+</code>
+</pre>
+
+The action mapping for <code>/address</code> is
+
+<pre>
+<code>
+&lt;action path="/address"
+        type="com.acme.AcmeAction"
+        name="acmeForm"
+        scope="session"
+        input="/pages/address.jsp"
+        parameter="submitName"&gt;
+
+        &lt;forward name="previous"
+                 path="/pages/name.jsp"/&gt;
+
+        &lt;forward name="done"
+                 path="/pages/done.jsp"/&gt;
+
+&lt;/action&gt;
+</code>
+</pre>
+
+Note that two action mappings are required to handle the page flow (we'll discuss why
+in the next section).
+
+</div>
+<h2 id="validations">Validations</h2>
+<div class="indent">
+
+Let's now add some validations to require input fields using the
+Validator.  In validation.xml, there's a <code>formset</code> definition
+that specifies two field validations for the form bean
+named <code>acmeForm</code>.
+
+
+<pre>
+<code>
+&lt;formset&gt;
+   &lt;form name="acmeForm"&gt;
+      &lt;field property="firstName" page="1" depends="required"&gt;
+          &lt;arg0 key="prompt.name"/&gt;
+      &lt;/field&gt;
+       &lt;field property="streetAddress" page="2" depends="required"&gt;
+          &lt;arg0 key="prompt.address"/&gt;
+      &lt;/field&gt;
+    &lt;/form&gt;
+  &lt;/formset&gt;
+</code>
+</pre>
+
+We need to identify the page where the input field resides so that
+we can control which validations are triggered for a given form
+submission.  Without using the page property, any request that
+involves the <code>acmeForm</code> would trigger all of the validations
+associated with <code>acmeForm</code> (even validations for fields that the user
+has not seen yet).
+
+On each of the pages, a hidden field is used to identify
+the page number.
+
+  In <code>name.jsp</code>
+
+<pre>
+<code>
+&lt;html:hidden property="page" value="1"/&gt;
+</code>
+</pre>
+
+  In <code>address.jsp</code>
+
+<pre>
+<code>
+&lt;html:hidden property="page" value="2"/&gt;
+</code>
+</pre>
+
+The Validator will use the value of the page property in determining which validations to run.
+
+Now let's revisit the reason for having two action mappings.  An action mapping
+is required for each page since the <code>input</code> attribute specifies the page to forward
+to in case validation fails.  Therefore we need to define an action mapping for each page
+that could be displayed after a validation fails.
+
+</div>
+<h2 id="cancel">Cancel and Previous</h2>
+<div class="indent">
+
+The tricky part is how to setup Previous and Cancel buttons
+for each of the pages.  If the user clicks Previous then
+the validations for the currrent page should not be triggered.
+For Cancel, none of the validations should be triggered.
+
+The solution for Previous is to set the page number property
+to the number of the previous page, effectively circumventing
+the validations associated with the current page.
+
+<pre>
+<code>
+   &lt;html:submit value="previous"
+          onclick="this.form.submitName.value='previous'; this.form.page.value='1'"/&gt;
+</code>
+</pre>
+
+For cancel, there are two options.  We could use the Struts
+Cancel button or create an action specifically designed to process
+a cancel request.  The <code>cancel</code> action has no associated validations.
+
+
+<pre>
+<code>
+&lt;action path="/cancel"
+        type="com.acme.CancelAction"&gt;
+
+    &lt;forward name="cancel"
+             path="/pages/cancel.jsp"/&gt;
+
+&lt;/action&gt;
+</code>
+</pre>
+
+And the Cancel button submits to the <code>/cancel</code> action path.
+
+<pre>
+<code>
+&lt;html:submit value="cancel" onclick="this.form.action='/acme/cancel.do'"/&gt;
+</code>
+</pre>
+
+The full example is <a href="dispatchValidator.zip"> here </a>.
+
+</div>
+ </div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

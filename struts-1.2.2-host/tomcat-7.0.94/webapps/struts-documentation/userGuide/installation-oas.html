@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>The Struts Framework Project - Installation - Orion Application Server</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+    
+    <p>User Guide</p>
+<ul>
+      <li>
+<a href="index.html">Table of Contents</a>
+</li>
+      <li>
+<a href="preface.html">Preface</a>
+</li>
+      <li>
+<a href="introduction.html">Introduction</a>
+</li>
+      <li>
+<a href="building_model.html">Model Components</a>
+</li>
+      <li>
+<a href="building_view.html">View Components</a>
+</li>
+      <li>
+<a href="building_controller.html">Controller Components</a>
+</li>
+      <li>
+<a href="configuration.html">Configuration</a>
+</li>
+      <li>
+<a href="release-notes.html">Release Notes</a>
+</li>
+      <li>
+<a href="installation.html">Installation</a>
+</li>
+    </ul>
+
+    <p>Developer Guides</p>
+<ul>
+        <li>
+<a href="dev_bean.html">Bean Tags</a>
+</li>
+        <li>
+<a href="dev_html.html">HTML Tags</a>
+</li>
+        <li>
+<a href="dev_logic.html">Logic Tags</a>
+</li>
+        <li>
+<a href="dev_nested.html">Nested Tags</a>
+</li>
+        <li>
+<a href="dev_tiles.html">Tiles Tags</a>
+</li>
+        <li>
+<a href="dev_util.html">Utilities</a>
+</li>
+        <li>
+<a href="dev_validator.html">Validator</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+        <li>
+<a href="index.html">User and Developer Guides *</a>
+</li>
+        <li>
+<a href="../faqs/index.html">FAQs and HowTos</a>
+</li>
+    </ul>
+
+</div>
+<!--end menu-->
+<div id="main">
+<h1 id="installation">5.2 Installation</h1>
+<h2 id="Containers">Installing Struts with your servlet container</h2>
+<div class="indent">
+
+<h4 id="orion">Orion Application Server</h4>
+
+<p>In the steps below, <code>$ORION_HOME</code> refers to the directory in which
+  you have installed Orion, and <code>$STRUTS_HOME</code> is the directory in
+  which you unpacked the Struts binary distribution.</p>
+
+<ul>
+  <li>Modify the file <code>$ORION_HOME/config/application.xml</code> to define
+    the two new applications, by adding the following declarations, immediately
+    following the <code>web-module</code> directive for the default web application:</li>
+</ul>
+
+<pre>&lt;web-module id="strutsDoc"
+path="$STRUTS_HOME/webapps/struts-documentation.war"/&gt;
+&lt;web-module id="strutsExample"
+path="$STRUTS_HOME/webapps/struts-example.war"/&gt;
+</pre>
+
+<ul>
+  <li>Modify the file <code>$ORION_HOME/config/default-web-site.xml</code> (or
+    the configuration file for any other Orion web site) to include the following
+    declarations, after the declaration for the &lt;default-web-app&gt; if any:</li>
+</ul>
+
+<pre>&lt;web-app application="default" name="strutsDoc"
+  root="/struts-documentation"/&gt;
+&lt;web-app application="default" name="strutsExample"
+  root="/struts-example"/&gt;
+</pre>
+
+<ul>
+  <li>After you start Orion, you should now be able to access these applications
+    (assuming you haven't changed the port number from the default of 80) at:</li>
+</ul>
+
+<pre>http://localhost/struts-documentation
+http://localhost/struts-example
+</pre>
+
+<ul>
+  <li>Versions of Orion up to at least 1.0.3 have a bug related to ServletContext.getResource()
+    calls that prevent the Struts example application from working out of the
+    box. This manifests itself as a JSP error when you try to access the example
+    application, with the following message:<br />
+    <code>javax.servlet.jsp.JspException: Missing resources attributeorg.apache.struts.action.MESSAGE</code>
+<br />
+    followed by an error traceback. There will also be an initialization error
+    message in the <code>ORION_HOME/log/global-application.log</code> log file.
+    To work around this problem, you can take the following steps:
+  <ul>
+    <li>Go to the <code>$STRUTS_HOME/webapps</code> directory, where you will
+      note that Orion has automatically expanded each web application into an
+      unpacked directory structure.</li>
+    <li>Go to the <code>$STRUTS_HOME/webapps/struts-example/WEB-INF</code> directory,
+      and copy the file <code>struts-config.xml</code> one directory up (that
+      is, into <code>$STRUTS_HOME/webapps/struts-example</code>.</li>
+    <li>Modify the <code>$STRUTS_HOME/webapps/struts-example/WEB-INF/web.xm</code>
+      file, changing the value of the "config" initialization parameter (for the
+      action servlet) from <code>/WEB-INF/struts-config.xml</code> to <code>/action.xml</code>.</li>
+    <li>Restart Orion, and you should be able to access the example application.</li>
+    <li>Note that this workaround has a negative security-related side effect:
+      your <code>struts-conifig.xml</code> file can now be retrieved by remote
+      clients at the following URL:<br />
+      <code>http://localhost/struts-example/struts-config.xml</code>
+<br />
+      Therefore, you should be sure you do not store sensitive information (such
+      as database passwords) in this file. </li>
+  </ul>
+  </li>
+</ul>
+
+  <hr />
+  <p>Back to <a href="installation.html#Containers">Installation</a>
+</p>
+</div>
+</div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

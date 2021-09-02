@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;struts-1.2.2-host/apache-tomcat-7.0.94&apos; to &apos;tomcat-7.0.94&apos;" description="Rename resource &apos;apache-tomcat-7.0.94&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="apache-tomcat-7.0.94" name="tomcat-7.0.94" stamp="1630567653186" updateReferences="true"/>&#x0A;<refactoring comment="Move 1 resources to &apos;webapps&apos;" description="Move 1 resources to &apos;webapps&apos;" destination="tomcat-7.0.94/webapps" element1="jakarta-struts-1.2.2/dist/webapps/struts-documentation.war" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1630568584083" updateReferences="true"/>
+</session>

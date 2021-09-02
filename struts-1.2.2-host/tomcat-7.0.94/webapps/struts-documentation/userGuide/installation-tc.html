@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>The Struts Framework Project - Installation - Tomcat with Apache</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="Craig R. McClanahan" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+    
+    <p>User Guide</p>
+<ul>
+      <li>
+<a href="index.html">Table of Contents</a>
+</li>
+      <li>
+<a href="preface.html">Preface</a>
+</li>
+      <li>
+<a href="introduction.html">Introduction</a>
+</li>
+      <li>
+<a href="building_model.html">Model Components</a>
+</li>
+      <li>
+<a href="building_view.html">View Components</a>
+</li>
+      <li>
+<a href="building_controller.html">Controller Components</a>
+</li>
+      <li>
+<a href="configuration.html">Configuration</a>
+</li>
+      <li>
+<a href="release-notes.html">Release Notes</a>
+</li>
+      <li>
+<a href="installation.html">Installation</a>
+</li>
+    </ul>
+
+    <p>Developer Guides</p>
+<ul>
+        <li>
+<a href="dev_bean.html">Bean Tags</a>
+</li>
+        <li>
+<a href="dev_html.html">HTML Tags</a>
+</li>
+        <li>
+<a href="dev_logic.html">Logic Tags</a>
+</li>
+        <li>
+<a href="dev_nested.html">Nested Tags</a>
+</li>
+        <li>
+<a href="dev_tiles.html">Tiles Tags</a>
+</li>
+        <li>
+<a href="dev_util.html">Utilities</a>
+</li>
+        <li>
+<a href="dev_validator.html">Validator</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+        <li>
+<a href="index.html">User and Developer Guides *</a>
+</li>
+        <li>
+<a href="../faqs/index.html">FAQs and HowTos</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>Craig R. McClanahan</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+<h1 id="installation">5.2 Installation</h1>
+<h2 id="Containers">Installing Struts with your servlet container</h2>
+<div class="indent">
+<h4 id="tc321">Tomcat 3.2.1 With Apache</h4>
+<p>Note that the instructions for Tomcat 4 will be different than those for Tomcat 3,
+but the Tomcat 4.0 web connector is still under development. Versions of Tomcat prior
+to 3.2.1 are not recommend for use with Struts.</p>
+<ul>
+  <li>These instructions assume you have successfully integrated Tomcat with Apache
+    according to the Tomcat documentation.</li>
+  <li>Copy "struts-documentation.war" and "struts-example.war" to your $TOMCAT_HOME/webapps
+    directory</li>
+  <li>Restart Tomcat if it is already running</li>
+  <li>Tomcat will generate a file "$TOMCAT_HOME/conf/tomcat-apache.conf" that
+    will be used by Apache. This file is regenerated every time you start Tomcat,
+    so copy this file to a safe place (such as your Apache configuration directory;
+    on Unix systems this is usually <code>/usr/local/apache/conf</code>.</li>
+  <li>If you are running Tomcat 3.1, Tomcat will not have generated the entries
+    for your new applications. Add the following lines to the <code>tomcat-apache.conf</code>
+    file that you have saved, replacing $TOMCAT_HOME with the path to your Tomcat
+    home directory:</li>
+</ul>
+<pre>
+Alias /struts-documentation "$TOMCAT_HOME/webapps/struts-documentation
+  &lt;Directory "$TOMCAT_HOME/webapps/struts-documentation&gt;
+    Options Indexes FollowSymLinks
+  &lt;/Directory&gt;
+    ApJServMount /struts-documentation/servlet /struts-documentation
+  &lt;Location "/struts-documentation/WEB-INF/"&gt;
+    AllowOverride None
+    deny from all
+  &lt;/Location&gt;
+Alias /struts-example "$TOMCAT_HOME/webapps/struts-example"
+  &lt;Directory "$TOMCAT_HOME/webapps/struts-example&gt;
+    Options Indexes FollowSymLinks
+  &lt;/Directory&gt;
+    ApJServMount /struts-example/servlet /struts-example
+  &lt;Location "/struts-example/WEB-INF/"&gt;
+    AllowOverride None
+    deny from all
+  &lt;/Location&gt;
+</pre>
+<ul>
+  <li>The generated file above does not know anything
+    about extension mappings defined in a web.xml file, so the "*.do" URIs that
+    go to the controller servlet will not be recognized. To fix this, add the
+    following line to the saved version of "tomcat-apache.conf", after the corresponding
+    line for the .jsp extension:<br />
+    <code>AddHandler jserv-servlet .do</code>
+</li>
+  <li>Ensure that the saved version of "tomcat-apache.conf" is referenced in your
+    Apache "httpd.conf" configuration file. A typical use would have the following
+    line at the bottom of "httpd.conf":<br />
+    <code>Include /usr/local/apache/conf/tomcat-apache.conf</code>
+</li>
+  <li>In order to recognize "index.jsp" as a default page for web applications,
+    search in your "httpd.conf" for a "DirectoryIndex" directive. If you have
+    one, add "index.jsp" to the end of the list, so that it might look like this:<br />
+    <code>DirectoryIndex index.html index.jsp</code>
+<br />
+    If you do not have such an entry, add one like this:<br />
+    <code>DirectoryIndex index.jsp</code>
+</li>
+  <li>Restart Apache to make it aware of the new applications. You should now
+    be able to access the applications from a browser like this:<br />
+    <code>http://localhost/struts-documentation<br />
+    http://localhost/struts-example</code>
+</li>
+</ul>
+  <hr />
+  <ul>
+<li>Author: Craig R. McClanahan</li>
+</ul>
+  <hr />
+  <p>Back to <a href="installation.html#Containers">Installation</a>
+</p>
+</div>
+</div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

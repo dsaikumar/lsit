@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Building Applications</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="Dan Walker" name="author" />
+<meta content="Ted Husted" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+
+    <p>FAQs</p>
+<ul>
+        <li>
+<a href="kickstart.html">Kickstart</a>
+</li>
+        <li>
+<a href="newbie.html">Newbie</a>
+</li>
+        <li>
+<a href="helping.html">How to Help</a>
+</li>
+    </ul>
+
+    <p>Howto Guides</p>
+<ul>
+        <li>
+<a href="actionForm.html">Action Forms</a>
+</li>
+        <li>
+<a href="apps.html">Building Apps</a>
+</li>
+        <li>
+<a href="database.html">Database</a>
+</li>
+        <li>
+<a href="indexedprops.html">Indexed Properties</a>
+</li>
+        <li>
+<a href="ssl.html">SSL</a>
+</li>
+
+        <li>
+<a href="struts-el.html">Struts-EL (JSTL)</a>
+</li>
+    </ul>
+
+    <p>IDE Guides</p>
+<ul>
+        <li>
+<a href="eclipse.html">Eclipse</a>
+</li>
+        <li>
+<a href="netbeans.html">Netbeans</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+
+        <li>
+<a href="../userGuide/index.html">User and Developer Guides</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>Dan Walker</li>
+<li>Ted Husted</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+<h1 id="building_apps">How to Build Applications</h1>
+<h2 id="intro">About This Document</h2>
+<div class="indent">
+<p>
+This document outlines one possible sequence of development steps that can be followed to create a
+Struts application.  It is not intended as a complete description of each
+referenced development activity.  More detailed documentation is available
+elsewhere and is referenced by "(more...)" links where possible.
+</p>
+</div>
+<h2 id="caveats">Caveats</h2>
+<div class="indent">
+<ol>
+<li>Requirements development and design are outside of the scope of this  document.</li>
+<li>For help installing Struts, see the <a href="../userGuide/installation.html">Getting Started</a> chapter.</li>
+<li>There are many other ways to approach Struts development and there are many
+    other features available besides the ones discussed below. This document
+    outlines only one way to get started.</li>
+<li>This document focuses on form/data centric applications, but may also work with
+    other types of applications.</li>
+<li>This material was written for Struts 1.1 (beta 2) and now 1.2.</li>
+</ol>
+</div>
+<h2 id="overview">Overview</h2>
+<div class="indent">
+<ol>
+<li>Implement data entry forms as JSP files.</li>
+<li>Implement one or more <code>ActionForm</code> descendents to buffer data
+    between JSPs and Actions.</li>
+<li>Create an XML document that defines the validation rules for your
+    application.</li>
+<li>Implement one or more <code>Action</code> descendents to respond form
+    submissions.</li>
+<li>Create <code>struts-config.xml</code> to associate forms with
+    actions.</li>
+<li>Create or update <code>web.xml</code> to reference
+    <code>ActionServlet</code>, taglibs used by Struts.</li>
+<li>Parallel Tasks
+<ol>
+<li>Building</li>
+<li>Unit Testing</li>
+<li>Deployment</li>
+</ol>
+</li>
+</ol>
+</div>
+<h2 id="details">Details</h2>
+<div class="indent">
+<ol>
+<li>Implement data entry forms as JSP files.
+<ol>
+<li>Use elements from the <code>html</code> taglib
+    to define the form elements. <a href="../userGuide/struts-html.html">
+    (more...)</a>
+</li>
+<li>Use <code>message</code> and other elements from the <code>bean</code>
+    taglib to define the labels and other static text of the form. 
+    <a href="../userGuide/struts-bean.html">(more...)</a>
+<ol>
+<li>Create and maintain a properties file of the text elements
+    to be displayed. <a href="../userGuide/preface.html#resources">(more...) 
+    </a>
+</li>
+</ol>
+</li>
+<li>Use <code>property</code> attributes to link form fields to 
+    <code>ActionForm</code> instance variables.</li>
+</ol>
+</li>
+<li>Implement one or more <code>ActionForm</code> descendents
+    to buffer data between JSPs and Actions.
+<ol>
+<li>Create get/set pairs that correspond to the property names
+    in your related JSP form. Example:
+<pre>&lt;html:text property="city" /&gt;</pre>
+    needs:
+<pre>getCity() and setCity(String c)</pre>
+</li>
+<li>When needed, create a <code>reset</code> method
+    that sets the fields of the <code>ActionForm</code> to their default values. Most ActionForms do not need to do this.</li>
+</ol>
+</li>
+<li>Create an XML document that defines the validation rules for your
+    application.</li>
+<li>Implement one or more <code>Action</code> descendents
+    to respond to form submissions.
+<ol>
+<li>Descend from DispatchAction or LookupDispatchAction if you
+    want one class to handle more than one kind of event (example: one Action
+    to handle 'insert', 'update' and 'delete' events, using a different "surrogate" execute method for each). <a href="http://husted.com/struts/tips/002.html">(more...)</a>
+</li>
+<li>Use the <code>execute</code> method
+    (or its surrogates) of your Action class to interface with objects in your
+    application responsible for database interaction, such as EJBs, etc.
+    
+</li>
+<li>Use the return value of the <code>execute</code> method
+    (or its surrogates) direct the user interface to the appropriate next page.
+
+</li>
+</ol>
+</li>
+<li>Create <code>struts-config.xml</code> to
+    associate forms with actions. The file minimally needs:</li>
+<li>Create or update <code>web.xml</code> to
+    reference <code>ActionServlet</code>, taglibs used by Struts. <a href="../userGuide/configuration.html#dd_config"> (more...)</a>
+</li>
+<li>Parallel Tasks
+<ol>
+<li>Building
+<ol>
+<li>Use Ant. It can compile, create WAR file, perform XSLT
+   transformations, run unit tests, interact with version control systems,
+   clean up, etc. <a href="http://jakarta.apache.org/ant"> (more...)</a>
+</li>
+<li>Create and use build script incrementally, as you create
+    files that need to be copied, compiled, etc. </li>
+</ol>
+</li>
+<li>Unit Testing
+<ol>
+<li>Unit test normal java beans with JUnit. <a href="http://www.junit.org"> (more...)</a>
+</li>
+<li>Unit test JSP, taglibs and conventional servlet components
+    with Cactus. <a href="http://jakarta.apache.org/cactus"> (more...)</a>
+</li>
+<li>Unit test Action servlets with StrutsTestCase. <a href="http://strutstestcase.sourceforge.net"> (more...)</a>
+</li>
+<li>Add all unit tests to the build script as a separate
+    target. This target should use the <code>junit</code> tag to launch each TestCase descendent. <a href="http://jakarta.apache.org/ant/manual/OptionalTasks/junit.html"> (more...)</a>
+</li>
+</ol>
+</li>
+<li>Deployment
+<ol>
+<li>Build script should create a war file containing the
+    files developed above, along with files that make up the Struts framework.
+    
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

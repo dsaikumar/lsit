@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>The Struts Framework Project - Installation - iPortal Application Server</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="John Ueltzhoeffer" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+    
+    <p>User Guide</p>
+<ul>
+      <li>
+<a href="index.html">Table of Contents</a>
+</li>
+      <li>
+<a href="preface.html">Preface</a>
+</li>
+      <li>
+<a href="introduction.html">Introduction</a>
+</li>
+      <li>
+<a href="building_model.html">Model Components</a>
+</li>
+      <li>
+<a href="building_view.html">View Components</a>
+</li>
+      <li>
+<a href="building_controller.html">Controller Components</a>
+</li>
+      <li>
+<a href="configuration.html">Configuration</a>
+</li>
+      <li>
+<a href="release-notes.html">Release Notes</a>
+</li>
+      <li>
+<a href="installation.html">Installation</a>
+</li>
+    </ul>
+
+    <p>Developer Guides</p>
+<ul>
+        <li>
+<a href="dev_bean.html">Bean Tags</a>
+</li>
+        <li>
+<a href="dev_html.html">HTML Tags</a>
+</li>
+        <li>
+<a href="dev_logic.html">Logic Tags</a>
+</li>
+        <li>
+<a href="dev_nested.html">Nested Tags</a>
+</li>
+        <li>
+<a href="dev_tiles.html">Tiles Tags</a>
+</li>
+        <li>
+<a href="dev_util.html">Utilities</a>
+</li>
+        <li>
+<a href="dev_validator.html">Validator</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+        <li>
+<a href="index.html">User and Developer Guides *</a>
+</li>
+        <li>
+<a href="../faqs/index.html">FAQs and HowTos</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>John Ueltzhoeffer</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+    <h1 id="installation">5.2 Installation</h1>
+<h2 id="Containers">Installing Struts with your servlet container</h2>
+<div class="indent">
+            <h4>
+                <a name="ipas13">iPortal Application Server 1.3</a>
+            </h4>
+            <strong>Tested with: Windows 2000</strong>
+            <h4>Important Note:</h4>
+            <p>At the moment, iPAS 1.3 is not fully compliant with the JSP 1.1/1.2
+specification. </p>
+            <p>Specifically, the automatic type conversions for custom tag parameters
+specified in "Issue  7" of the JSP 1.1 Errata and in the JSP 1.2 Proposed
+Final Draft have not yet been implemented.</p>
+            <p>As it stands, JSP pages that make use of Struts taglibs whose parameters
+require  conversion (such as booleans) will not compile under JRun. This
+includes the Struts Example Application. Attempting to run the example
+application will result in an exception similar to the following being
+thrown:</p>
+<pre>
+/struts-example/index.jsp:
+
+Compilation failed [IT_Builder:1000]
+ at com.iona.j2ee.builder.JavaBuilder.build(JavaBuilder.java:84)
+ at com.iona.j2ee.builder.JspBuilder.build(JspBuilder.java:51)
+ at com.iona.j2ee.builder.WarBuilder.build(WarBuilder.java:111)
+ at com.iona.j2ee.builder.EarBuilder.build(EarBuilder.java:99)
+ at com.iona.j2ee.builder.EarBuilder.main(EarBuilder.java:223)
+ at iportal.build.main(build.java:14)
+ ocale(boolean) in org.apache.struts.taglib.html.HtmlTag
+   cannot be applied to (java.lang.String)
+       _x0.setLocale("true");
+            ^
+ 1 error
+</pre>
+            <p>(For more details see refer to:<br />
+                
+                    <a href="http://www.mail-archive.com/struts-user@jakarta.apache.org/msg01860.html">http://www.mail-archive.com/struts-user@jakarta.apache.org/msg01860.html</a>
+                )
+        </p>
+            <p>The following instructions describe how to install the Struts Example
+Application under iPAS 1.3. A subsequent section describes how the Struts
+Example Application can be patched to work with Struts.</p>
+            <p>The following instructions assume the following:</p>
+            <ul>
+                <li>iPortal Application Server 1.3 has been installed.</li>
+                <li>Both the Strut and XML Parser libraries are in your classpath.</li>
+            </ul>
+            <h4>Installing the struts example application</h4>
+            <ul>
+                <li>Start iPAS Services by clicking on the [Start iPAS Services] menu item. </li>
+                <li>Start the iPortal Application Server by clicking on the [iPortal Application Server] menu item. </li>
+                <li>Start a command shell. Change to the <code>$INSTALLDIR\IONA</code> and run the
+setenvs.bat file.</li>
+                <li>Create a directory called jars.</li>
+            </ul>
+            <p>Now run the EARSCO tool. Type <code>java iportal.earsco</code> and at the prompts do:</p>
+            <ul>
+                <li>Next</li>
+                <li>Type in the application name of <code>struts-example</code> then click next.</li>
+                <li>In step three click the check box and enter the name of the
+   WAR <code>struts-example</code>.Then click next.</li>
+                <li>Click on Finish.</li>
+            </ul>
+            <p>Now you must copy the contents of the struts-example war into the EARSCO
+directory structure as follows: </p>
+            <p>Under <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war</code> you
+copy contents into the following directories: etc, lib, src and web.</p>
+            <ul>
+                <li>Copy all files in the root directory <br />
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example\WEB-INF</code>
+                    <br />
+   into the earsco directory<br />
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\etc</code>
+                    <br />
+   Do not copy in the classes or lib directories.</li>
+                <li>Copy the directory <br />
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example\WEB-INF\lib</code>
+                    <br />
+   into the earsco directory<br />
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\lib</code>
+                </li>
+                <li>Copy the directory <br />
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example\WEB-INF\classes</code>
+                    <br />
+   into the earsco directory<br />
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\src</code>
+                    <br />
+                </li>
+                <li>Copy the directory <br />
+                    <code>$INSTALLDIR\jakarta-tomcat-3.2.1\webapps\struts-example </code>
+                    <br />
+   into the earsco directory <br />
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\src\struts-example.war\web</code>
+                    <br />
+                </li>
+                <li>Next modify the application.xml in the <br />
+                    <code>$INSTALLDIR\IONA\jars\struts-examples\etc</code> directory to this: </li>
+            </ul>
+            <pre>
+     &lt;application&gt;
+
+     &lt;!-- Add display name --&gt;
+           &lt;display-name&gt;Struts Example&lt;/display-name&gt;
+                 .......
+</pre>
+            <ul>
+                <li>Last update the cc.xml in the <br />
+                    <code>$INSTALLDIR\IONA\jars\struts-examples directory as follows:</code>
+                </li>
+            </ul>
+            <pre>
+     &lt;configuration&gt;
+       &lt;web-app&gt;
+         &lt;context-root&gt;struts-example&lt;/context-root&gt;
+       &lt;/web-app&gt;
+     &lt;/configuration&gt;
+</pre>
+            <p>Now you are ready to compile and deploy the struts-example.</p>
+            <p>To compile the source from the $INSTALLDIR\IONA\jars\struts-examples type </p>
+            <p>
+                <code>java iportal.build</code>
+            </p>
+            <p>Next, type</p>
+            <p>
+                <code>java iportal.deploy</code>
+            </p>
+            <p>The first time you deploy you will be prompted by a Deploy wizard and asked to
+supply both locations of the struts-example.ear file and of the cc.xml file.
+Once both elements have been satisfied continue until the finish button and
+click it. The EAR file should deploy successfully.</p>
+            <p>Test the sample application by using the following URL in the browser:</p>
+            <p>
+                <code>http://hostname:9000/struts-example/index.jsp</code>
+            </p>
+            <p>The <code>struts-documentation.war</code> can be installed using the same procedure.</p>
+            <h4>Patching the struts example application</h4>
+            <p>As mentioned at the beginning of these notes, the Struts Example Application
+will not run under iPAS 1.3 without modification. The following changes will
+need to be made:</p>
+            <ul>
+                <li>index.jsp, logon.jsp: Change &lt;html:html locale="true"&gt; to <br />&lt;html:html locale=&lt;%= true %&gt;&gt;</li>
+                <li>registration.jsp, subscription.jsp: Change all instances of filter="true" to <br />filter=&lt;%= true %&gt;</li>
+            </ul>
+            <hr />
+            <p>Back to <a href="installation.html#Containers">Installation</a>
+            </p>
+        </div>
+    </div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

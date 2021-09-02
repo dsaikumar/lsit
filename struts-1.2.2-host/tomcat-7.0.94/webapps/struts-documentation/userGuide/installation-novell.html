@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>The Struts Framework Project - Installation - Novell ExteNd Application Server</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="John Berry" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+    
+    <p>User Guide</p>
+<ul>
+      <li>
+<a href="index.html">Table of Contents</a>
+</li>
+      <li>
+<a href="preface.html">Preface</a>
+</li>
+      <li>
+<a href="introduction.html">Introduction</a>
+</li>
+      <li>
+<a href="building_model.html">Model Components</a>
+</li>
+      <li>
+<a href="building_view.html">View Components</a>
+</li>
+      <li>
+<a href="building_controller.html">Controller Components</a>
+</li>
+      <li>
+<a href="configuration.html">Configuration</a>
+</li>
+      <li>
+<a href="release-notes.html">Release Notes</a>
+</li>
+      <li>
+<a href="installation.html">Installation</a>
+</li>
+    </ul>
+
+    <p>Developer Guides</p>
+<ul>
+        <li>
+<a href="dev_bean.html">Bean Tags</a>
+</li>
+        <li>
+<a href="dev_html.html">HTML Tags</a>
+</li>
+        <li>
+<a href="dev_logic.html">Logic Tags</a>
+</li>
+        <li>
+<a href="dev_nested.html">Nested Tags</a>
+</li>
+        <li>
+<a href="dev_tiles.html">Tiles Tags</a>
+</li>
+        <li>
+<a href="dev_util.html">Utilities</a>
+</li>
+        <li>
+<a href="dev_validator.html">Validator</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+        <li>
+<a href="index.html">User and Developer Guides *</a>
+</li>
+        <li>
+<a href="../faqs/index.html">FAQs and HowTos</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>John Berry</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+<h1 id="installation">5.2 Installation</h1>
+<h2 id="Containers">Installing Struts with your servlet container</h2>
+<div class="indent">
+
+<h4 id="orion">Novell ExteNd Application Server 4.0</h4>
+
+<strong>Using the ExteNd Workbench to deploy a WAR to the Novell ExteNd
+application server:</strong>
+<ul>
+  <li>Start the Novell ExteNd application server.</li>
+  <li>Using the ExteNd Workbench, create a new project:
+    <ol>
+    <li>File &gt; New Project</li>
+    <li>Select <em>Deploy-Only</em> and click <code>OK</code>
+</li>
+    <li>Under Archive File select the appropriate Struts WAR file</li>
+    <li>Indicate the type of file (i.e. WAR 1.2)</li>
+    <li>Give the Deploy-Only project a name (i.e. struts-example)</li>
+    <li>Give the Deploy-Only project a location
+        (i.e. <code>D:\Struts</code>)</li>
+    <li>Click <code>Next</code>
+</li>
+    <li>Review the material to be sure everything is correct</li>
+    <li>Click <code>Finish</code>
+</li>
+    </ol>
+  </li>
+  <li>Setting up a deployment plan and server profile:
+    <ol>
+    <li>Right click on the project icon you just created and
+        select <em>Deployment Plan</em>
+</li>
+    <li>Select <code>OK</code> when asked to create a new deployment
+        plan</li>
+    <li>Save the deployment plan</li>
+    <li>Create a server profile:  Projects &gt; Deployment Settings</li>
+    <li>Click on the Server Profiles tab</li>
+    <li>Select a server profile and click <code>OK</code>
+</li>
+    </ol>
+  </li>
+  <li>Deploy the project:
+    <ol>
+    <li>Project &gt; Deploy Archive</li>
+    </ol>
+  </li>
+</ul>
+
+<strong>Deploying a WAR from a command line using SilverCmd:</strong>
+<ul>
+  <li>Start the SilverStream application server.</li>
+  <li>Create an XML deployment plan for the <code>struts-example.war</code>
+      application.</li>
+  <li>Call the file <code>struts-example-depl-plan.xml</code>.  You
+      can use the following contents for the file:
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE warJarOptions PUBLIC
+  "-//Silverstream Software, Inc.//DTD J2EE WAR Deployment Plan//EN"
+  "deploy_war.dtd"&gt;
+&lt;warJarOptions&gt;
+  &lt;warJar&gt;
+    &lt;warJarName&gt;struts-example.war&lt;/warJarName&gt;
+    &lt;isEnabled&gt;true&lt;/isEnabled&gt;
+    &lt;urls&gt;
+      &lt;el&gt;struts-example&lt;/el&gt;
+    &lt;/urls&gt;
+  &lt;/warJar&gt;
+&lt;/warJarOptions&gt;
+</pre>
+  </li>
+  <li>Create an XML deployment plan for the
+      <code>struts-documentation.war</code> application.</li>
+  <li>Call the file <code>struts-documentation-depl-plan.xml</code>.  You
+      can use the following contents for the file:
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE warJarOptions PUBLIC
+  "-//Silverstream Software, Inc.//DTD J2EE WAR Deployment Plan//EN"
+  "deploy_war.dtd"&gt;
+&lt;warJarOptions&gt;
+  &lt;warJar&gt;
+    &lt;warJarName&gt;struts-documentation.war&lt;/warJarName&gt;
+    &lt;isEnabled&gt;true&lt;/isEnabled&gt;
+    &lt;urls&gt;
+      &lt;el&gt;struts-documentation&lt;/el&gt;
+    &lt;/urls&gt;
+  &lt;/warJar&gt;
+&lt;/warJarOptions&gt;
+</pre>
+  </li>
+  <li>Run the following "SilverCmd DeployWAR" commands to deploy the
+      applications.  You can change 'localhost' to whatever server you
+      are deploying to.  You can change 'Silvermaster' to whatever
+      database you are deploying to.
+<pre>
+SilverCmd DeployWar localhost Silvermaster struts-example.war
+  -f struts-example-depl-plan.xml
+SilverCmd DeployWar localhost Silvermaster struts-documentation.war
+  -f struts-documentation-depl-plan.xml
+</pre>
+  </li>
+</ul>
+
+  <hr />
+  <p>Back to <a href="installation.html#Containers">Installation</a>
+</p>
+</div>
+</div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

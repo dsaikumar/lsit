@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Struts Release Notes (Version 1.0.2)</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="Craig R. McClanahan" name="author" />
+<meta content="Robert Leland" name="author" />
+<meta content="Ted Husted" name="author" />
+<meta content="Martin Cooper" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+    
+    <p>User Guide</p>
+<ul>
+      <li>
+<a href="index.html">Table of Contents</a>
+</li>
+      <li>
+<a href="preface.html">Preface</a>
+</li>
+      <li>
+<a href="introduction.html">Introduction</a>
+</li>
+      <li>
+<a href="building_model.html">Model Components</a>
+</li>
+      <li>
+<a href="building_view.html">View Components</a>
+</li>
+      <li>
+<a href="building_controller.html">Controller Components</a>
+</li>
+      <li>
+<a href="configuration.html">Configuration</a>
+</li>
+      <li>
+<a href="release-notes.html">Release Notes</a>
+</li>
+      <li>
+<a href="installation.html">Installation</a>
+</li>
+    </ul>
+
+    <p>Developer Guides</p>
+<ul>
+        <li>
+<a href="dev_bean.html">Bean Tags</a>
+</li>
+        <li>
+<a href="dev_html.html">HTML Tags</a>
+</li>
+        <li>
+<a href="dev_logic.html">Logic Tags</a>
+</li>
+        <li>
+<a href="dev_nested.html">Nested Tags</a>
+</li>
+        <li>
+<a href="dev_tiles.html">Tiles Tags</a>
+</li>
+        <li>
+<a href="dev_util.html">Utilities</a>
+</li>
+        <li>
+<a href="dev_validator.html">Validator</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+        <li>
+<a href="index.html">User and Developer Guides *</a>
+</li>
+        <li>
+<a href="../faqs/index.html">FAQs and HowTos</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>Craig R. McClanahan</li>
+<li>Robert Leland</li>
+<li>Ted Husted</li>
+<li>Martin Cooper</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+
+  <h2 id="Introduction">Introduction</h2>
+<div class="indent">
+
+    <p>This document contains the release notes for
+    <strong>Version 1.0.2</strong> of the Struts Framework,
+    and covers changes that have taken place since
+    <a href="release-notes-1.0.1.html">Version 1.0.1</a>
+    was released.  The following sections cover
+    <a href="#New">New Features</a> and <a href="#Changes">Changes</a>
+    to Struts.</p>
+
+    <p>This version covers bug-fixes only; no new functionality.</p>
+
+  </div>
+
+
+  <h2 id="Included">What's Included?</h2>
+<div class="indent">
+
+    <p>The binary distribution of this release includes the following
+    files relevant to Struts 1.0.2:</p>
+    <ul>
+    <li>
+<code>INSTALL</code> - Brief installation instructions.  See
+        the <code>Struts Documentation Application</code>, or online at
+        <a href="http://jakarta.apache.org/struts/">http://jakarta.apache.org/struts/</a>
+        for more information.</li>
+    <li>
+<code>LICENSE</code> - The Apache Software Foundation license that
+        defines the terms under which you can use Struts (and other software
+        licensed by Apache).</li>
+    <li>
+<code>README</code> - A brief introduction to Struts.</li>
+    <li>
+<code>lib/</code> - Directory containing files you will need in
+        your own applications.  The individual files of interest are:
+        <ul>
+        <li>
+<code>struts.jar</code> - JAR file that contains the compiled
+            Java classes for version 1.0.2 of Struts.  You must
+            place this file in the <code>/WEB-INF/lib</code> directory of
+            your web application.</li>
+        <li>
+<code>struts-xxxxx.tld</code> - The tag library descriptor files
+            for the Struts 1.0.2 tag libraries (bean, html, logic, and
+            template).  You must place these files in the <code>/WEB-INF</code>
+            directory of your web application, and reference them with
+            appropriate <code>&lt;taglib&gt;</code> directives in your
+            web.xml file.</li>
+        <li>
+<code>jdbc2_0-stdext.jar</code> - The JDBC 2.0 Optional Package
+            API classes (package <code>javax.sql</code>).  You will need to
+            include this file in the <code>/WEB-INF/lib</code> directory
+            of your application, if it is not already made visible to web
+            applications by your servlet container.</li>
+        <li>
+<code>struts-config_1_0.dtd</code> - The document type descriptor
+            (DTD) for the Struts configuration file (which is typically named
+            <code>/WEB-INF/struts-config.xml</code>.  Your configuration file
+            will be validated against an internal copy of this DTD -- this
+            copy is available for reference purposes only.</li>
+        <li>
+<code>web-app_2_2.dtd</code> - The document type descriptor (DTD)
+            for web.xml files conforming to the Servlet 2.2 specification.
+            This copy is for reference purposes only.</li>
+        <li>
+<code>web-app_2_3.dtd</code> - The document type descriptor (DTD)
+            for web.xml files conforming to the Servlet 2.3 specification.
+            This copy is for reference purposes only.</li>
+        </ul>
+        </li>
+        <li>
+<code>webapps/</code> - Web Application Archive (WAR) files for the
+            web applications that are included with Struts.</li>
+    </ul>
+
+    <p>The struts 0.5 milestone API release is no longer supported,
+       and will be removed as of Struts 1.1.</p>
+
+  </div>
+
+
+  <h2 id="New">What's New?</h2>
+<div class="indent">
+
+    <p>No new features have been added in this release.</p>
+
+  </div>
+
+
+  <h2 id="Changes">Changes and Bug Fixes</h2>
+<div class="indent">
+
+    <p>The following changes and bug fixes have occurred in the basic
+    controller framework (package <code>org.apache.struts.action</code>):</p>
+    <ul>
+    <li>The <code>ActionForm.getMultipartRequestHandler()</code> method is now
+        public rather than protected, to restore compatibility with the Tiles
+        extension.</li>
+    </ul>
+
+  </div>
+
+
+  </div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Struts EL Extension - Apache Struts</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="David Karr" name="author" />
+<link href="../struts.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="heading">
+<a href="http://apache.org/">
+<img id="asf_logo_wide" alt="The Apache Project" src="../images/asf_logo_wide.gif" />
+</a>
+<a href="http://struts.apache.org/">
+<img id="struts-logo" alt="Struts Framework" src="../images/struts.gif" />
+</a>
+</div>
+<!--end heading-->
+<div id="content">
+<div id="menu">
+
+    
+
+    <p>FAQs</p>
+<ul>
+        <li>
+<a href="kickstart.html">Kickstart</a>
+</li>
+        <li>
+<a href="newbie.html">Newbie</a>
+</li>
+        <li>
+<a href="helping.html">How to Help</a>
+</li>
+    </ul>
+
+    <p>Howto Guides</p>
+<ul>
+        <li>
+<a href="actionForm.html">Action Forms</a>
+</li>
+        <li>
+<a href="apps.html">Building Apps</a>
+</li>
+        <li>
+<a href="database.html">Database</a>
+</li>
+        <li>
+<a href="indexedprops.html">Indexed Properties</a>
+</li>
+        <li>
+<a href="ssl.html">SSL</a>
+</li>
+
+        <li>
+<a href="struts-el.html">Struts-EL (JSTL)</a>
+</li>
+    </ul>
+
+    <p>IDE Guides</p>
+<ul>
+        <li>
+<a href="eclipse.html">Eclipse</a>
+</li>
+        <li>
+<a href="netbeans.html">Netbeans</a>
+</li>
+    </ul>
+
+    <p>Quick Links</p>
+<ul>
+        <li>
+<a href="../index.html">Welcome</a>
+</li>
+
+        <li>
+<a href="../userGuide/index.html">User and Developer Guides</a>
+</li>
+    </ul>
+
+<div class="authors">
+<p>
+<strong>Contributors</strong>
+</p>
+<ul>
+<li>David Karr</li>
+</ul>
+</div>
+</div>
+<!--end menu-->
+<div id="main">
+<h1 id="faq">Struts EL Extension</h1>
+<h2 id="Introduction">Introduction</h2>
+<div class="indent">
+
+    <p>
+        This subproject is an extension of the Struts tag library.  Each JSP custom tag
+       in this library is a subclass of an associated tag in the Struts tag library.
+       One difference is that this tag library does not use "rtexprvalues", it uses
+       the expression evaluation engine in the Jakarta Taglibs implementation of the
+       JSP Standard Tag Library (version 1.0) to evaluate attribute values.
+    </p>
+
+    <p>
+       In addition, some of the Struts tags were not ported to this library, as it was
+       determined that their functionality was entirely supplied by the JSTL.  These
+       particular Struts tags, and the reason for their non-porting will be described
+       in the documentation for this library.
+    </p>
+
+    <p>
+       In order to fully understand the correct utilization of this library, you must
+       understand the use and operation of the Struts tag library, and the use and
+       operation of the JavaServer Pages Standard Tag Library (hereafter called the
+       "JSTL"), along with the expression language (sometimes called the "EL") used
+       for evaluating attribute values.
+    </p>
+
+    </div>
+<h2 id="TagMapping">Tag Mapping</h2>
+<div class="indent">
+
+    <p>
+       In implementing the Struts-EL library, every Struts tag that provides a feature
+       that is not covered by the JSTL (1.0) library is mapped into the Struts-EL
+       library.  This section reviews which Struts tags are NOT implemented in the
+       Struts-EL library, and which JSTL tags provide that feature.
+    </p>
+
+    <p>
+       Many of the non-porting decisions were based on the fact that the JSTL
+       expression language itself provides the same functionality.  In those cases, in
+       addition to a possible JSTL tag name, the symbol "EL" will be listed.
+    </p>
+
+    <p>
+       <strong> Bean Tag Library Tags NOT Implemented in Struts-EL</strong>
+    </p>
+
+    <table>
+    <tr>
+<th>Struts Tag</th>
+<th>JSTL Tag</th>
+</tr>
+    <tr>
+<td>cookie</td>
+<td>c:set, EL</td>
+</tr>
+    <tr>
+<td>define</td>
+<td>c:set, EL</td>
+</tr>
+    <tr>
+<td>header</td>
+<td>c:set, EL</td>
+</tr>
+    <tr>
+<td>include</td>
+<td>c:import</td>
+</tr>
+    <tr>
+<td>parameter</td>
+<td>c:set, EL</td>
+</tr>
+    <tr>
+<td>write</td>
+<td> c:out</td>
+</tr>
+    </table>
+
+    <p>
+       <strong>Bean Tag Library Tags NOT Implemented in Struts-EL</strong>
+    </p>
+
+    <table>
+    <tr>
+<th>Struts Tag</th>
+<th>JSTL Tag</th>
+</tr>
+    <tr>
+<td>empty</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    <tr>
+<td>equal</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    <tr>
+<td>greaterEqual</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    <tr>
+<td>greaterThan</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    <tr>
+<td>lessEqual</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    <tr>
+<td>lessThan</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    <tr>
+<td>notEmpty</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    <tr>
+<td>notEqual</td>
+<td>c:if, c:when, EL</td>
+</tr>
+    </table>
+
+    <p>
+       (Note that the "iterate" tag was originally ported, even with the presence of
+       the "c:forEach" tag, as the "indexed tag" functionality was not supported when
+       using "c:forEach" instead of "logic:iterate".  This has since been rectified,
+       such that the "indexed tag" functionality checks for being contained in a
+       "c:forEach" tag, in addition to the "logic:iterate" tag.  However, the ported
+       "iterate" tag has not been removed from Struts-EL, for backward compatibility.)
+    </p>
+
+    <p>
+       <strong>Html Tag Library Tags NOT Implemented in Struts-EL</strong>
+    </p>
+
+    <p>
+       None (all of them were ported).
+    </p>
+
+    </div>
+<h2 id="AttributeMapping">Attribute Mapping</h2>
+<div class="indent">
+
+    <p>
+       At this point of the implementation, there is only one change (to two similar
+       tags) to the set of attributes between the Struts tags, and the Struts-EL tags.
+       The "logic:match" and "logic:notMatch" tags have an additional attribute named
+       "expr", which can take any value, and will be used as the value to compare
+       against, in addition to the choices of "cookie", "header", "name"/"property",
+       and "parameter".
+    </p>
+
+    </div>
+<h2 id="UsageRequirements">Usage Requirements</h2>
+<div class="indent">
+
+    <p>
+       The Struts-EL tag library requires the use of the Struts tag library, and the
+       Java Server Pages Standard Tag Library.  It is not necessary for JSP pages
+       using the Struts-EL tag library to also use the Struts tags or the JSTL tags,
+       but the Struts and JSTL tag libraries need to be part of the application
+       utilizing the Struts-EL tag library.
+    </p>
+
+    <p>
+       This is because the Struts-EL tag classes are all subclasses of Struts tag
+       classes, and their implementation uses classes provided by the JSTL.
+    </p>
+
+    </div>
+</div>
+<!--end main-->
+</div>
+<!--end content-->
+<div id="footer">
+<img id="powered-logo" alt="Powered by Struts" src="../images/struts-power.gif" />
+        Copyright (c) 2000-2004, The Apache Software Foundation <span class="noprint">- 
+        <a href="http://wiki.apache.org/struts/StrutsDocComments">Comments?</a>
+</span>
+</div>
+<!--end footer-->
+</body>
+</html>
