@@ -63,3 +63,5 @@
 0:0:0:0:0:0:0:1 - - [02/Sep/2021:13:15:25 +0530] "GET /struts-documentation/api/allclasses-frame.html HTTP/1.1" 200 44285
 0:0:0:0:0:0:0:1 - - [02/Sep/2021:13:15:25 +0530] "GET /struts-documentation/api/overview-summary.html HTTP/1.1" 200 12248
 0:0:0:0:0:0:0:1 - - [02/Sep/2021:13:15:25 +0530] "GET /struts-documentation/api/stylesheet.css HTTP/1.1" 200 1231
+127.0.0.1 - - [02/Sep/2021:13:31:12 +0530] "GET / HTTP/1.1" 200 11369
+0:0:0:0:0:0:0:1 - - [02/Sep/2021:13:31:20 +0530] "GET /struts-documentation/ HTTP/1.1" 304 -
