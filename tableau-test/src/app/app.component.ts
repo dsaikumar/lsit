@@ -9,13 +9,16 @@ import {TableauAuthoringViz} from 'tableau-embed';
 export class AppComponent {
   title = 'tableau-test';
   url = 'https://public.tableau.com/views/Superstore_24/Overview';
+  constructor(){
+    this.loadTableau();
+  }
   loadTableau(){
     const viz = new TableauAuthoringViz();
 
     viz.src = this.url;
     viz.hideCloseButton = true;
     viz.toolbar = 'hidden';
-    let element : HTMLElement | null = document.getElementById('tableauViz');
+    let element : HTMLElement | null = document.getElementById('tab-viz');
     if(element != null){
       element.appendChild(viz);
     }

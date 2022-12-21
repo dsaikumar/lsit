@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "build": "ng-packagr -p ng-package.json"
+    }
+}
