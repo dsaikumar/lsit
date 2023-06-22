@@ -1,0 +1,34 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Converting file to base64 Encoding format</title>
+        <script type="text/javascript">
+            var parseFile = (event) => {
+                let inputFileElement = event.target;
+                let file = inputFileElement.files[0]; // Type is https://developer.mozilla.org/en-US/docs/Web/API/FileList
+                console.log("File Type ---->", file.type);
+                console.log("File size ---->", file.size);
+                console.log("File name ---->", file.name);
+                let reader = new FileReader();
+                reader.onload = (event) => {   // event is https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent
+                    // event.target or event.srcElement or event.currentTarget is FileReader
+                    let data = event.target.result; //result is the property of the FileReader which has base64 encoded string
+                    let [contentType, base64Content] = [...data.split('data:')[1].split(';base64,')];
+                    console.log("Content Type ---->", contentType);
+                    console.log("Base64 Content ---->", base64Content);
+                };
+                reader.readAsDataURL(file);
+            }
+        </script>
+    </head>
+    <body>
+        <h6><a href="/index.html">Go Back</a></h6>
+        <h1>Converting file to base64 Encoding format</h1>
+        <table border="1" cellpadding="10">
+            <tr>
+                <td>Single File</td>
+                <td><input type="file" onchange="parseFile(event)" /></td>
+            </tr>
+        </table>
+    </body>
+</html>

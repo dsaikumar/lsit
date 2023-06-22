@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Reading files from input type files</title>
+        <script type="text/javascript">
+            var selectFile = (event) => {
+                let inputFileElement = event.target;
+                let files = inputFileElement.files; // Type is https://developer.mozilla.org/en-US/docs/Web/API/FileList
+                console.log('Files ====> ',files);
+            }
+        </script>
+    </head>
+    <body>
+        <h6><a href="/index.html">Go Back</a></h6>
+        <h1>Reading files from input type files</h1>
+        <table border="1" cellpadding="10">
+            <tr>
+                <td>Select for Single File</td>
+                <td><input type="file" onchange="selectFile(event)" /></td>
+            </tr>
+            <tr>
+                <td>Select for Multiple files</td>
+                <td><input type="file" onchange="selectFile(event)" multiple/></td>
+            </tr>
+        </table>
+    </body>
+</html>
