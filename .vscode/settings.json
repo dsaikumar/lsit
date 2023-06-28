@@ -1,0 +1,21 @@
+{
+    "window.title": "${activeFolderMedium}${separator}${rootName}",
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "all",
+    "editor.hover.delay": 10,
+    "editor.mouseWheelZoom": false,
+    "zenMode.hideLineNumbers": false,
+    "rest-client.logLevel": "verbose",
+}
+
+/*
+"liveServer.settings.host": "localhost",
+    "liveServer.settings.port": 80,
+    "liveServer.settings.root": "/clwebui-v2/dist/cloudleaf-cdk",
+    "liveServer.settings.CustomBrowser": "chrome:PrivateMode",
+    "liveServer.settings.proxy": {
+        "enable": false,
+        "baseUri": "/api",
+        "proxyUri": "https://dev11.cloudleaf.io/cloudos/"
+    }
+*/
