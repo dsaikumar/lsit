@@ -41,8 +41,13 @@ if not VALUE:
     print('Done, you got the not operator')
 else:
     print('not a not operator ')
-HIGH_INCOME = True
+HIGH_INCOME = False
 GOOD_CREDIT = True
 STUDENT = False
 if HIGH_INCOME and GOOD_CREDIT and not STUDENT:
     print('Eligible')
+
+if HIGH_INCOME or GOOD_CREDIT and not STUDENT:
+    print('Eligible')
+
+# "and" "or" operator is called as circuit operator
