@@ -1,0 +1,10 @@
+Welcome to Home
+<input #element [value]="name" (focus)="inputFocus=true;" (blur)="inputFocus=false;"/>
+<ng-container *ngTemplateOutlet="greet"></ng-container>
+<hr />
+<ng-container *ngTemplateOutlet="eng; context: myContext"></ng-container>
+<hr />    <ng-container *ngTemplateOutlet="svk; context: myContext"></ng-container>
+<hr />
+<ng-template #greet><span>Hello</span></ng-template>
+<ng-template #eng let-name><span>Hello {{ name }}!</span></ng-template>
+<ng-template #svk let-bapa="localSk"><span>Ahoj {{ bapa }}!</span></ng-template>
